@@ -1,0 +1,15 @@
+<infinispan>
+    <cache-container name="default">
+
+        <local-cache name="book">
+            <expiration lifespan="600000"/>
+            <indexing enabled="true"
+                      storage="local-heap">
+                <indexed-entities>
+                    <indexed-entity>search.Book</indexed-entity>
+                </indexed-entities>
+            </indexing>
+        </local-cache>
+
+    </cache-container>
+</infinispan>
