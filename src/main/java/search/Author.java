@@ -7,13 +7,22 @@ import org.infinispan.protostream.annotations.ProtoFactory;
 import org.infinispan.protostream.annotations.ProtoField;
 import org.infinispan.protostream.annotations.ProtoName;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Table;
+
+@Embeddable
 @Indexed
 @ProtoName("author")
+@Table
 public class Author {
 
    private String firstname;
    private String surname;
    private Integer numberOfPublishedBooks;
+
+   public Author() {
+      // required by JPA
+   }
 
    @ProtoFactory
    public Author(String firstname, String surname, Integer numberOfPublishedBooks) {

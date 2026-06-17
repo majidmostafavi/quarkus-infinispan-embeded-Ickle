@@ -29,14 +29,18 @@ A simple example demonstrating how to use Quarkus with Infinispan Embedded to st
 - `src/main/resources/application.properties`  
   Points Quarkus to the Infinispan XML config.
 
-## Project Structure
+## Project Structure (hexagonal)
 
 ```text
 src/
 ├── main/
 │   ├── java/
-│   │   ├── BookResource.java
-│   │   └── search/
+│   │   ├── adapters/
+│   │   │   ├── inbound/rest/BookResource.java
++│   │   │   └── outbound/infinispan/InfinispanBookRepository.java
+│   │   ├── application/BookService.java
++│   │   ├── application/port/BookRepository.java
++│   │   └── search/
 │   │       ├── Author.java
 │   │       ├── Book.java
 │   │       ├── Review.java
