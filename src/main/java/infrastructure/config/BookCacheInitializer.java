@@ -1,6 +1,7 @@
 package infrastructure.config;
 
 import application.port.out.BookCachePort;
+import application.port.out.BookRepositoryPort;
 import domain.model.Book;
 import io.quarkus.logging.Log;
 import io.quarkus.runtime.StartupEvent;
@@ -16,15 +17,15 @@ import java.util.Map;
 public class BookCacheInitializer {
 
     @Inject
-    BookCachePort bookCachePort;
+    BookRepositoryPort bookRepositoryPort;
 
     void onStart(@Observes StartupEvent event) {
-        Log.info("Initializing book cache with sample data...");
+        Log.info("Initializing  && Insert data to DB");
         Map<String, Book> books = ModelGenerator.generateBooks();
         books.forEach((key, book) -> {
-            bookCachePort.put(key, book);
-            Log.info("Loaded book into cache: " + key);
+            bookRepositoryPort.save(key, book);
+            Log.info("Loaded book into: " + key);
         });
-        Log.info("Book cache initialized with " + books.size() + " entries.");
+        Log.info("Book  initialized with " + books.size() + " entries.");
     }
 }

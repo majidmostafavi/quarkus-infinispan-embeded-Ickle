@@ -7,9 +7,6 @@ import jakarta.inject.Inject;
 import org.infinispan.Cache;
 import org.infinispan.commons.api.query.Query;
 import org.infinispan.manager.EmbeddedCacheManager;
-import org.infinispan.query.Search;
-import org.infinispan.query.dsl.QueryFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
