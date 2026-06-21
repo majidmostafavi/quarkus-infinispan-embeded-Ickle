@@ -1,4 +1,4 @@
-package bounded;
+package domain.model.bounded;
 
 import org.infinispan.protostream.annotations.ProtoFactory;
 import org.infinispan.protostream.annotations.ProtoField;

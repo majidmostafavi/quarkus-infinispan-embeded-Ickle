@@ -1,6 +1,7 @@
-package bounded;
+package domain.service;
 
 
+import domain.model.bounded.Developer;
 import io.quarkus.cache.CacheInvalidate;
 import io.quarkus.cache.CacheInvalidateAll;
 import io.quarkus.cache.CacheResult;

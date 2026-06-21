@@ -1,4 +1,4 @@
-package search;
+package domain.model;
 
 import org.infinispan.api.annotations.indexing.Basic;
 import org.infinispan.api.annotations.indexing.Indexed;

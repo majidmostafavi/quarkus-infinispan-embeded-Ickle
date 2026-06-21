@@ -32,22 +32,31 @@ A simple example demonstrating how to use Quarkus with Infinispan Embedded to st
 ## Project Structure (hexagonal)
 
 ```text
-src/
-├── main/
-│   ├── java/
-│   │   ├── adapters/
-│   │   │   ├── inbound/rest/BookResource.java
-+│   │   │   └── outbound/infinispan/InfinispanBookRepository.java
-│   │   ├── application/BookService.java
-+│   │   ├── application/port/BookRepository.java
-+│   │   └── search/
-│   │       ├── Author.java
-│   │       ├── Book.java
-│   │       ├── Review.java
-│   │       └── ...
-│   └── resources/
-│       ├── application.properties
-│       └── caches.xml
+┌─────────────────────────────────────────────────────────┐
+│              DRIVING SIDE (LEFT)                        │
+│  infrastructure/adapter/in/BookResource.java  (REST)    │
+└──────────────────────┬──────────────────────────────────┘
+                       │ calls
+┌──────────────────────▼──────────────────────────────────┐
+│              APPLICATION LAYER                          │
+│  application/port/in/  ← interfaces (use cases)         │
+│  application/usecase/BookUseCaseImpl.java               │
+│  application/dto/  (BookDTO, AuthorDTO, ReviewDTO...)   │
+└──────────────────────┬──────────────────────────────────┘
+                       │ calls
+┌──────────────────────▼──────────────────────────────────┐
+│              DOMAIN LAYER (Core)                        │
+│  domain/model/  (Book, Author, Review)                  │
+│  domain/service/BookDomainService.java                  │
+│  domain/exception/DomainException.java                  │
+└──────────────────────┬──────────────────────────────────┘
+                       │ implements
+┌──────────────────────▼──────────────────────────────────┐
+│              DRIVEN SIDE (RIGHT)                        │
+│  application/port/out/BookCachePort.java  ← interface   │
+│  infrastructure/adapter/out/InfinispanBookCacheAdapter  │
+│  infrastructure/config/BookCacheInitializer.java        │
+└─────────────────────────────────────────────────────────┘
 ```
 ## Cache Configuration
 
@@ -55,7 +64,7 @@ The `book` local cache is configured with:
 
 - Expiration (`lifespan="600000"`)
 - Indexing enabled (`storage="local-heap"`)
-- Indexed entity: `search.Book`
+- Indexed entity: `domain.model.Book`
 
 ## REST Endpoints
 

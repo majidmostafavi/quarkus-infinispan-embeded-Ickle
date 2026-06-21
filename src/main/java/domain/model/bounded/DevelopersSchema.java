@@ -1,4 +1,4 @@
-package bounded;
+package domain.model.bounded;
 
 import org.infinispan.protostream.GeneratedSchema;
 import org.infinispan.protostream.annotations.AutoProtoSchemaBuilder;
